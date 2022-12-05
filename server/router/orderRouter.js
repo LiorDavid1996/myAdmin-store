@@ -1,8 +1,8 @@
 const router = require('express').Router()
-const {getOrder,createOrder,getLestWeek} = require('../controler/order-ctr')
+const {getOrder,createOrder,createManyOrder} = require('../controler/order-ctr')
 
 router.get('/',getOrder)
 router.post('/createOrder',createOrder)
-router.get('/getLestWeek',getLestWeek)
+router.get('/createManyOrder',createManyOrder)
 
 module.exports= router

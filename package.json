@@ -32,9 +32,9 @@
     "mongoose": "^6.7.4",
     "nodemon": "^2.0.20",
     "npm-check-updates": "^16.4.3",
+    "objectid": "^3.2.1",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "validator": "^13.7.0"
-
   }
 }

@@ -2,10 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const order = new Schema({
-  name: { type: Array, required: true},
+  product: { type: Array, required: true},
   price: {type: Number , required:true},
-  city:{type:String ,required:true},},
-  {timestamps:true}
+  city:{type:String ,required:true},
+  createdAt:{type:Date,required:true},
+  updatedAt:{type:Date,required:true}
+}
 
 
 );

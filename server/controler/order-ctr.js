@@ -16,43 +16,37 @@ const getOrder = async (req, res) => {
 
 const createOrder = async (req, res) => {
   await orderModel
-    .insertMany({ ...req.body, createdAt: new Date().toISOString() })
+    .insertMany(req.body )
     .then(() =>
       res.status(300).json({ success: true, massage: "order added succesfuly" })
     )
     .catch((error) => res.status(400).json({ success: false, error }));
 };
-const getByName = async (req, res) => {
-  const coffe = [];
-  await orderModel.find({}).then((result, error) => {
-    result.name.filter((name) => {
-      if (name == "coffe") {
-        coffe.push(name);
+const createManyOrder = async () =>{
+  const products = [['coffee',10],['tea',7],['pizza',40],['burger',40],['sushi',19],['engera',50]]
+    const cityArr=  ['nethanya','rehovot','lod','telAviv','azor','holon']
+    for (let index = 60; index > 1  ;index--) {
+      let product=[],price=0,orCity=cityArr[Math.floor(60/(index+1))]
+      for (let j = 0; j < Math.floor(Math.random()*5); j++) {
+        let i=Math.floor((Math.random()*4))
+        product.push(products[i][0])
+        price+=products[i][1]
+        city=cityArr[i]
+        console.log(i);
       }
-    });
-  });
-};
+      const obj={
+        city:city,
+        price:price,
+        product:product,
+        createdAt:new Date(new Date().setDate(-(Math.floor(60/(index+1))))),
+        updatedAt:new Date(new Date().setDate(-(Math.floor(60/(index+1)))))
+      }
+      await orderModel.insertMany(obj)
+    }
 
-const getLestWeek = async (req, res) => {
-  const week = {};
+}
 
-  for (let i = 1; i <= 7; i++) {
-    const start = new Date();
-    start.setDate(start.getDate() - i);
-    const end = new Date();
-    end.setDate(end.getDate() - i + 1);
-    await orderModel
-      .find({ createdAt: { $gte: start, $lt: end } })
-      .count()
-      .then((result, error) => {
-        if (error) {
-          return res.status(400).json({ success: false, message: error });
-        }
-        week[i] = { date: start.toString().slice(0, 10), result };
-      });
-  }
-  return res.status(200).json({ success: true, message: week })
-  
-};
 
-module.exports = { getOrder, createOrder, getLestWeek };
+
+
+module.exports = { getOrder, createOrder, createManyOrder};
