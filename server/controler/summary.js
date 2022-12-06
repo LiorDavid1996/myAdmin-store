@@ -1,10 +1,13 @@
 const orderModel = require("../model/ordersModel");
 const summaryModel = require("../model/summary-Model");
+const moment = require("moment");
 
 async function summaryEveryTwentyFourHours(today, toSumOrders) {
   if (toSumOrders == undefined) [today, toSumOrders] = await getInitDocuments();
   for (let index = 0; index < toSumOrders.length; index++) {
     const element = toSumOrders[index];
+   
+
     if (today.cities[element.city] == undefined)
       today.cities[element.city] = {};
     let cities = { ...today.cities[element.city] };
@@ -16,6 +19,7 @@ async function summaryEveryTwentyFourHours(today, toSumOrders) {
         revenue: cities.revenue + element.price,
       };
     else
+
       cities = {
         ...cities,
         products: getItems({}, element.product),
@@ -27,6 +31,7 @@ async function summaryEveryTwentyFourHours(today, toSumOrders) {
     today.revenue += element.price;
     today.cities[element.city] = cities;
   }
+
   uploadChanges();
 
   async function getInitDocuments() {
@@ -44,6 +49,7 @@ async function summaryEveryTwentyFourHours(today, toSumOrders) {
       allTimeDocument: false,
       revenue: 0,
       cities: { start: true },
+      days: { start: true },
       refunds: 0,
       lastId: true,
     };
@@ -57,10 +63,19 @@ async function summaryEveryTwentyFourHours(today, toSumOrders) {
     }
     return city;
   }
+  
+  function getArrayDates() {
+    let daysArray = [];
+    for (let index = 1; index < 8; index++) {
+      let day = moment().subtract(index, "days").format("YYYY/MM/DD");
+      daysArray.push(day);
+    }
+    return daysArray;
+  }
+
 
   async function uploadChanges(i = toSumOrders.length) {
     await summaryModel.insertMany({ ...today, time: new Date().getTime() });
   }
 }
 module.exports = { summaryEveryTwentyFourHours };
-

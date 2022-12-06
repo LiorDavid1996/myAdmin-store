@@ -9,8 +9,9 @@ const summary = new Schema({
   revenue: {type:Number},
   cities: {type:Object},
   refunds: {type:Number},
-  allTimeDocument:{type:Boolean}
-  
+  allTimeSum:{type:Boolean},
+  lastDoc:{type:String},
+  dayIs:{type:Date}
 },{timestamps:true});  
 
 module.exports = mongoose.model("summary", summary);

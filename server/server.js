@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const cors = require("cors");
-const { summaryEveryTwentyFourHours } = require("./controler/summary");
+const { summaryHandle } = require("./controler/LastChance");
 
 const sumRouter = require("./router/sumRouter");
 const orderRouter = require("./router/orderRouter");
@@ -14,6 +14,7 @@ app.use(cors());
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 const db = require("./DB");
+const { summaryEveryTwentyFourHours } = require("./controler/summary");
 
 app.use("/orders", orderRouter);
 app.use("/sum", sumRouter);

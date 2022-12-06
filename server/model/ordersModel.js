@@ -5,8 +5,10 @@ const order = new Schema({
   product: { type: Array, required: true},
   price: {type: Number , required:true},
   city:{type:String ,required:true},
-  createdAt:{type:Date,required:true},
-  updatedAt:{type:Date,required:true}
+  createdAt:{type:String,required:true},
+  updatedAt:{type:String,required:true}
+  
+  
 }
 
 
