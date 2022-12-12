@@ -19,6 +19,7 @@ const { summaryEveryTwentyFourHours } = require("./controler/summary");
 app.use("/orders", orderRouter);
 app.use("/sum", sumRouter);
 // setInterval(()=>summaryEveryTwentyFourHours(),(3000))
+
 // setInterval(()=>createUser(),15000)
 
 app.get("/", (req, res) => {

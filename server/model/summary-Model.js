@@ -8,6 +8,7 @@ const summary = new Schema({
    sum: {type:Number},
   revenue: {type:Number},
   cities: {type:Object},
+  days:{type:Object},
   refunds: {type:Number},
   allTimeSum:{type:Boolean},
   lastDoc:{type:String},

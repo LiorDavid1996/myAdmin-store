@@ -46,7 +46,10 @@ const createManyOrder = async (req, res) => {
       city = cityArr[i];
      
     }
-    time=new Date(new Date().setDate(-(40/index)))
+    let T = Math.floor(Math.random() * 8)
+
+    time= new Date()
+    time.setDate(time.getDate() -T )
     const obj = {
       city: city,
       price: price,
