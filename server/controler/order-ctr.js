@@ -40,7 +40,7 @@ const createManyOrder = async (req, res) => {
     let product = [],
       price = 0
     for (let j = 0; j < Math.floor(Math.random() * 5); j++) {
-      let i = Math.floor(Math.random() * 5+1)
+      let i = Math.floor(Math.random() * 6)
       product.push(products[i][0]);
       price += products[i][1];
       city = cityArr[i];
