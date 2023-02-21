@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const cors = require("cors");
-const { summaryHandle } = require("./controler/LastChance");
+
 
 const sumRouter = require("./router/sumRouter");
 const orderRouter = require("./router/orderRouter");
@@ -15,12 +15,12 @@ app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 const db = require("./DB");
 const { summaryEveryTwentyFourHours } = require("./controler/summary");
-
 app.use("/orders", orderRouter);
 app.use("/sum", sumRouter);
 // setInterval(()=>summaryEveryTwentyFourHours(),(3000))
-
+// summaryEveryTwentyFourHours()
 // setInterval(()=>createUser(),15000)
+
 
 app.get("/", (req, res) => {
   res.send({ massage: "success" });

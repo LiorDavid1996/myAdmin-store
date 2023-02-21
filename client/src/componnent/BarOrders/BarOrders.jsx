@@ -26,7 +26,7 @@ function BarOrders() {
       },
     ],
   });
-  console.log(userData);
+  
   return (
       <div style={{height:"30vh" ,border:'1px solid black'}} >
 <Bar data={userData} />

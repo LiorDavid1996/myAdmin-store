@@ -8,9 +8,17 @@ import AvgOrder from './componnent/sum/AvgOrder/AvgOrder';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import DataManager from '@syncfusion/ej2-data'
+import { useContext } from "react";
+import  StateContext  from '../src/Context/Context';
 
 function App() {
+ 
+const data=StateContext(useContext)
+console.log(data);
+
   return (
+    
     <>
       <Container >
       <Row>

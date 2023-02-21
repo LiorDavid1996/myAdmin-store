@@ -11,6 +11,7 @@ const summary = new Schema({
   days:{type:Object},
   refunds: {type:Number},
   allTimeSum:{type:Boolean},
+  products:{type:Object},
   lastDoc:{type:String},
   dayIs:{type:Date}
 },{timestamps:true});  

@@ -1,8 +1,8 @@
 const summaryModel = require("../model/summary-Model");
 
 const getSum = async (req, res) => {
-    await summaryModel.findOne({}).then((result, err) => {
-      console.log(result);
+    await summaryModel.find({}).then((result, err) => {
+      
       if (err) {
         return res.status(400).json({ success: false, message: err });
       }
