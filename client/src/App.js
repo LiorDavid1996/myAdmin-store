@@ -10,15 +10,21 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import DataManager from '@syncfusion/ej2-data'
 import { useContext } from "react";
-import  StateContext  from '../src/Context/Context';
+import  {StateContext}  from '../src/Context/Context';
 
 function App() {
  
-const data=StateContext(useContext)
-console.log(data);
+const {data,isLoading}=useContext(StateContext);
 
-  return (
+  
+if(isLoading==false){
+ const {cities} =data[0]
+ console.log(cities);
+}
+
+  return(
     
+  
     <>
       <Container >
       <Row>

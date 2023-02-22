@@ -3,18 +3,23 @@ import summaryServices from '../Services/summary'
 
 import axios from "axios";
 
-const StateContext = createContext();
+export const StateContext = createContext();
 
 export default  function ContextProvider({ children }) {
   // Initialize state
-  const [data, setData] = useState("ll");
+  const [data, setData] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    summaryServices().then(res=> setData(res.message))
+    summaryServices().
+    then(res=> {setData(res?.message);
+    setIsLoading(false)}
+    
+    )
 
   }, []);
+  console.log(data);
  
 
   return (
