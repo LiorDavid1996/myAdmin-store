@@ -6,6 +6,7 @@ const Admin = new Schema({
   lastName: {type: String , required:true},
   code:{type:Number ,required:true},
   role:{type:String,required:true},  
+
 }
 
 
