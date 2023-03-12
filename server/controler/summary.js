@@ -24,6 +24,7 @@ async function summaryEveryTwentyFourHours(today, toSumOrders) {
         products: getItems({}, element.product),
         sum: 1,
         revenue: element.price,
+        name:day
       };
 
     if (today.cities[element.city] == undefined)
@@ -43,17 +44,29 @@ async function summaryEveryTwentyFourHours(today, toSumOrders) {
         products: getItems({}, element.product),
         sum: 1,
         revenue: element.price,
+        name:element.city
       };
 
     today.sum++;
     today.revenue += element.price;
     today.cities[element.city] = cities;
-    today.products = getItems( today.products , element.product);
+    today.products["product"] = getItems( today.products.product , element.product);
 
   }
-  let li =Object.keys(today.products).reduce((a, b) => today.products[a] >today.products[b] ? a : b);
-  today.products=Object.entries(today.products)
+  today.products["sum"]=productSum(today.products.product)
+  
+  let li =Object.keys(today.products.product).reduce((a, b) => today.products[a] >today.products[b] ? a : b);
   today.products["max_product"]=li
+
+
+  const salesArr = Object.values(today.days);
+  
+  const salesArr1 = Object.values(today.cities);
+
+  today.days=sortDays(salesArr)
+  today.cities=salesArr1
+  
+
 
   uploadChanges();
 
@@ -68,7 +81,9 @@ async function summaryEveryTwentyFourHours(today, toSumOrders) {
     return {
       sum: 0,
       revenue: 0,
-      products: {},
+      products: {
+        product:{}
+      },
       cities: {},
       days: {},
     };
@@ -77,11 +92,28 @@ async function summaryEveryTwentyFourHours(today, toSumOrders) {
   function getItems(city, arr) {
     for (let index = 0; index < arr.length; index++) {
       const element = arr[index];
+      
       if (Number(city[element])) city[element]++;
-      else city[element] = 1
+      else{city[element] = 1
+      
+      }  
     }
     return city;
   }
+  function productSum(items) {
+    let total = 0;
+for (let item in items) {
+  total += items[item];
+}
+return total
+  }
+
+function sortDays(daysArray) {
+  const sortedArr = daysArray.sort((a, b) => {
+    return new Date(a.name) - new Date(b.name);
+  });
+  return sortedArr
+}
 
   async function uploadChanges(i = toSumOrders.length) {
    
